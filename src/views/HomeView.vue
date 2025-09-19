@@ -1,0 +1,3 @@
+<template>
+  kocak
+</template>
