@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { Toaster } from "vue-sonner";
 import "vue-sonner/style.css";
-import { RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
+import Navbar from "./components/organisms/Navbar.vue";
+
+const route = useRoute();
+
+const Authenticated = !["/login", "/register"].includes(route.path);
 </script>
 
 <template>
   <Toaster position="top-center" rich-colors />
+  <Navbar v-if="Authenticated" />
   <RouterView />
 </template>

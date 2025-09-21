@@ -22,7 +22,7 @@ export const useAuthStore = defineStore("auth", {
           { email, password }
         );
         this.user = response.data.user;
-        this.router.push({ name: "Home" });
+        this.router.push({ name: "home" });
       } catch (error) {
         if (axios.isAxiosError(error)) {
           let err = error?.response?.data as ApiResponse;
@@ -38,7 +38,7 @@ export const useAuthStore = defineStore("auth", {
           { email, username, password }
         );
         this.user = response.data.user;
-        this.router.push("/login");
+        this.router.push({ name: "login" });
       } catch (error) {
         if (axios.isAxiosError(error)) {
           let err = error?.response?.data as ApiResponse;
@@ -61,7 +61,7 @@ export const useAuthStore = defineStore("auth", {
     async fetchUser() {
       try {
         const response = await axios.get<{ user: User }>(
-          `${import.meta.env.VITE_API_URL}/api/auth/user`
+          `${import.meta.env.VITE_API_URL}/api/auth/me`
         );
         this.user = response.data.user;
       } catch (error) {
