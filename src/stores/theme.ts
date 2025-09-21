@@ -11,18 +11,37 @@ function applyTheme(theme: Theme) {
   }
 }
 
+function getInitialTheme(): Theme {
+  const stored = localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark") {
+    return stored;
+  }
+
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+  return "light";
+}
+
 export const useThemeStore = defineStore("theme", {
   state: () => ({
-    theme: "light" as Theme,
+    theme: getInitialTheme() as Theme,
   }),
   actions: {
     setTheme(newTheme: Theme) {
       this.theme = newTheme;
+      localStorage.setItem("theme", newTheme);
       applyTheme(newTheme);
     },
     toggleTheme() {
       const newTheme = this.theme === "light" ? "dark" : "light";
       this.setTheme(newTheme);
+    },
+    initialize() {
+      applyTheme(this.theme);
     },
   },
 });

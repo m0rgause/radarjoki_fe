@@ -3,10 +3,13 @@ import { Toaster } from "vue-sonner";
 import "vue-sonner/style.css";
 import { RouterView, useRoute } from "vue-router";
 import Navbar from "./components/organisms/Navbar.vue";
+import { computed } from "vue";
 
 const route = useRoute();
 
-const Authenticated = !["/login", "/register"].includes(route.path);
+const Authenticated = computed(
+  () => !["/login", "/register"].includes(route.path)
+);
 </script>
 
 <template>

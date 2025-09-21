@@ -5,8 +5,9 @@ import router from "./router";
 import { createPinia } from "pinia";
 import axios from "axios";
 import { useAuthStore } from "./stores/auth";
+import { useThemeStore } from "./stores/theme";
 
-axios.defaults.baseURL = "http://localhost:3000/api";
+axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
 
 const pinia = createPinia();
@@ -21,6 +22,9 @@ app.use(router);
 
 async function initializeApp() {
   const authStore = useAuthStore();
+  const themeStore = useThemeStore();
+
+  themeStore.initialize();
   try {
     await authStore.fetchUser();
   } catch (error) {

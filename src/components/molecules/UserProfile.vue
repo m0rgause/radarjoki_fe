@@ -13,12 +13,9 @@ import { useThemeStore } from "@/stores/theme";
 
 import { Sun, Moon } from "lucide-vue-next";
 import { useAuthStore } from "@/stores/auth";
-import { computed } from "vue";
 
 const themeStore = useThemeStore();
 const authStore = useAuthStore();
-
-const user = computed(() => authStore.user);
 
 const toggleTheme = () => {
   themeStore.toggleTheme();
@@ -26,7 +23,7 @@ const toggleTheme = () => {
 </script>
 
 <template>
-  <template v-if="user">
+  <template v-if="authStore.isAuthenticated">
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
         <Button variant="ghost" class="relative h-8 w-8 rounded-full">

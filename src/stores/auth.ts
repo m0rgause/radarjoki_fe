@@ -17,11 +17,11 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login(email: string, password: string) {
       try {
-        const response = await axios.post<{ user: User }>(
+        const response = await axios.post<{ data: User }>(
           `${import.meta.env.VITE_API_URL}/api/auth/login`,
           { email, password }
         );
-        this.user = response.data.user;
+        this.user = response.data.data;
         this.router.push({ name: "home" });
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -33,11 +33,11 @@ export const useAuthStore = defineStore("auth", {
     },
     async register(email: string, username: string, password: string) {
       try {
-        const response = await axios.post<{ user: User }>(
+        const response = await axios.post<{ data: User }>(
           `${import.meta.env.VITE_API_URL}/api/auth/register`,
           { email, username, password }
         );
-        this.user = response.data.user;
+        this.user = response.data.data;
         this.router.push({ name: "login" });
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -53,17 +53,17 @@ export const useAuthStore = defineStore("auth", {
       try {
         await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`);
         this.user = null;
-        this.router.push({ name: "Login" });
+        this.router.push({ name: "login" });
       } catch (error) {
         console.error("Logout failed", error);
       }
     },
     async fetchUser() {
       try {
-        const response = await axios.get<{ user: User }>(
+        const response = await axios.get<{ data: User }>(
           `${import.meta.env.VITE_API_URL}/api/auth/me`
         );
-        this.user = response.data.user;
+        this.user = response.data.data;
       } catch (error) {
         this.user = null;
       }

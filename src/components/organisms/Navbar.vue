@@ -32,25 +32,6 @@ import UserProfile from "../molecules/UserProfile.vue";
       <!-- User Profile & Actions -->
       <div class="flex items-center gap-4">
         <UserProfile />
-        <!-- Example: Add a theme toggle button from shadcn/vue -->
-        <button
-          class="shadcn-btn shadcn-btn-ghost rounded-full p-2"
-          aria-label="Toggle theme"
-        >
-          <svg
-            class="h-5 w-5 text-muted-foreground"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              d="M12 3v1m0 16v1m8.485-8.485h-1M4.515 12.515h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <circle cx="12" cy="12" r="5" stroke-width="2" />
-          </svg>
-        </button>
       </div>
     </div>
   </header>
