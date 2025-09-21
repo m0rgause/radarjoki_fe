@@ -49,5 +49,24 @@ export const useAuthStore = defineStore("auth", {
         );
       }
     },
+    async logout() {
+      try {
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`);
+        this.user = null;
+        this.router.push({ name: "Login" });
+      } catch (error) {
+        console.error("Logout failed", error);
+      }
+    },
+    async fetchUser() {
+      try {
+        const response = await axios.get<{ user: User }>(
+          `${import.meta.env.VITE_API_URL}/api/auth/user`
+        );
+        this.user = response.data.user;
+      } catch (error) {
+        this.user = null;
+      }
+    },
   },
 });
